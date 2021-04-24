@@ -17,7 +17,7 @@ class BasePokemon:
         result['base_spd'] = row[9]
         return result
     
-    def build_atrr_dict(self, pid, pname, ptype1, ptype2, bhp, batk, bdef, bspatk, bspdef, bspd):
+    def build_attr_dict(self, pid, pname, ptype1, ptype2, bhp, batk, bdef, bspatk, bspdef, bspd):
         result = {}
         result['p_id'] = pid
         result['p_name'] = pname
@@ -39,3 +39,51 @@ class BasePokemon:
             obj = self.build_map_dict(row)
             result_list.append(obj)
         return jsonify(pokemon_list)
+
+    def getPokemonId(self, pid):
+        dao = BasePokemonDAO()
+        pokemon = dao.getPokemonById(pid)
+        if not pokemon:
+            return jsonify("Pokemon not found"), 404
+        else:
+            result = self.build_map_dict(pokemon)
+            return jsonify(result)
+    
+    def newPokemon(self, json):
+        p_name = json['p_name']
+        p_type1 = json['p_type1']
+        p_type2 = json['p_type2']
+        base_hp = json['base_hp']
+        base_atk = json['base_atk']
+        base_def = json['base_def']
+        base_spatk = json['base_spatk']
+        base_spdef = json['base_spdef']
+        base_spd = json['base_spd']
+        dao = BasePokemonDAO()
+        pid = dao.insertPokemon(p_name, p_type1,p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        result = self.build_attr_dict(pid, p_name, p_type1, p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        return jsonify(result), 201
+
+    def deletePokemon(self, pid):
+        dao = BasePokemonDAO()
+        result = dao.deletePokemon(pid)
+        if result:
+            return jsonify("Pokemon Deleted"), 200
+        else:
+            return jsonify("Pokemon not found"), 404
+
+    def updatePokemon(self, json, pid):
+        p_name = json['p_name']
+        p_type1 = json['p_type1']
+        p_type2 = json['p_type2']
+        base_hp = json['base_hp']
+        base_atk = json['base_atk']
+        base_def = json['base_def']
+        base_spatk = json['base_spatk']
+        base_spdef = json['base_spdef']
+        base_spd = json['base_spd']
+        dao = BasePokemonDAO()
+        updated = dao.updatePokemon(pid, p_name, p_type1,p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        result = self.build_attr_dict(pid, p_name, p_type1, p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        return jsonify(result), 200
+    

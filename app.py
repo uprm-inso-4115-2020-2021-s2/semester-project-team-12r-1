@@ -21,7 +21,18 @@ if __name__ == '__main__':
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
-@app.route('/pokemons', methods=['GET'])
-def users():
-    if request.method == 'GET':
+@app.route('/pokemons', methods=['GET', 'POST'])
+def pokemons():
+    if request.method == 'POST':
+        return BasePokemon().newPokemon(request.json)
+    else:
         return BasePokemon().getAllPokemon()
+
+@app.route('/pokemon/<int:uid>', methods=['GET', 'PUT', 'DELETE'])
+def spec_pokemon(pid):
+    if request.method == 'PUT':
+        return BasePokemon().updatePokemon(request.json, pid)
+    elif request.method == 'DELETE':
+        return BasePokemon().deletePokemon(pid)
+    else:
+        return BasePokemon().getPokemonId(pid)
