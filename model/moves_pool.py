@@ -17,7 +17,7 @@ class movespoolDAO:
             result.append(row)
         return result
 
- def getmovesbymoveid(self,move_id):
+    def getmovesbymoveid(self,move_id):
         cursor = self.conn.cursor()
         query = "select move_id from moves_pool where move_id = %s;"
         cursor.execute(query,move_id)

@@ -33,7 +33,7 @@ class BasePokemon:
 
     def getAllPokemon(self):
         dao = BasePokemonDAO()
-        pokemon_list = dao.getAllPokemon
+        pokemon_list = dao.getAllPokemon()
         result_list = []
         for row in pokemon_list:
             obj = self.build_map_dict(row)
