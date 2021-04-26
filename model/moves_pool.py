@@ -1,42 +1,43 @@
 from config.dbconfig import pg_config
 import psycopg2
 
-class movesDAO:
+class movespoolDAO:
     def __init__(self):
         connection_url = "dbname=%s user=%s password=%s port=%s host='localhost'" %(pg_config['dbname'], pg_config['user'],
                                                                   pg_config['password'], pg_config['dbport'])
         print("conection url:  ", connection_url)
         self.conn = psycopg2.connect(connection_url)
 
-    def getmoves(self):
+    def getmovesbypid(self,p_id):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_basepower, secondary_effect from moves;"
-        cursor.execute(query)
+        query = "select move_id from moves_pool where p_id = %s;"
+        cursor.execute(query,p_id)
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def getmovebyid(self, move_id):
+ def getmovesbymoveid(self,move_id):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_basepower, secondary_effect from moves where move_id = %s;"
-
-        cursor.execute(query, (move_id))
-        result = cursor.fetchone()
+        query = "select move_id from moves_pool where move_id = %s;"
+        cursor.execute(query,move_id)
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
-    def insertmove(self,move_name, move_type, move_basepower, secondary_effect):
+    def insertmovepool(self, move_id, p_id):
         cursor = self.conn.cursor()
-        query = "insert into moves ( move_name, move_type, move_basepower, secondary_effect) values(%s,%s,%s,%s)returning move_id"
-        cursor.execute(query, (move_name, move_type, move_basepower, secondary_effect))
+        query = "insert into moves_pool ( move_id, p_id) values(%s,%s)returning move_id"
+        cursor.execute(query, (move_id,p_id ))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
 
 
-    def deleteitem(self, move_id):
+    def deletemove(self, move_id):
         cursor = self.conn.cursor()
-        query = "delete from moves where move_id=%s;"
+        query = "delete from moves_pool where move_id=%s;"
         cursor.execute(query,(move_id)
         # determine affected rows
         affected_rows = cursor.rowcount

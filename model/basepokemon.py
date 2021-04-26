@@ -38,7 +38,7 @@ class BasePokemonDAO:
         cursor = self.conn.cursor()
         query = "update base_pokemon set p_name=%s, ptype1=%s, ptype2=%s, base_hp=%s, base_atk=%s, base_def=%s, base_spatk=%s, base_spdef=%s, base_spd=%s where p_id=%s"
 
-        cursor.execute(query, (p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd, p_id,))
+        cursor.execute(query, (p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd, p_id))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
