@@ -116,3 +116,6 @@ def spec_saved_build(pid):
         return SavedBuild().deletePokemon(pid)
     else:
         return SavedBuild().getPokemonId(pid)
+
+if __name__ == '__main__':
+    app.run()
