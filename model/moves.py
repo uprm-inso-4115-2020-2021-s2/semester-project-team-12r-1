@@ -33,14 +33,13 @@ class movesDAO:
         self.conn.commit()
         return pid
 
-
     def deleteitem(self, move_id):
         cursor = self.conn.cursor()
         query = "delete from moves where move_id=%s;"
-        cursor.execute(query,(move_id)
+        cursor.execute(query,(move_id))
         # determine affected rows
-        affected_rows = cursor.rowcount
+        affected = cursor.rowcount
         self.conn.commit()
         # if affected rows == 0, the part was not found and hence not deleted
         # otherwise, it was deleted, so check if affected_rows != 0
-        return affected_rows !=0
+        return affected !=0
