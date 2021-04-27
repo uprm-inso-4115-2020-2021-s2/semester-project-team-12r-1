@@ -1,1 +1,4 @@
-web: gunicorn gettingstarted.wsgi
+Flask
+Flask-Cors
+gunicorn
+psycopg2
