@@ -38,7 +38,7 @@ class movespoolDAO:
     def deletemove(self, move_id):
         cursor = self.conn.cursor()
         query = "delete from moves_pool where move_id=%s;"
-        cursor.execute(query,(move_id)
+        cursor.execute(query,(move_id))
         # determine affected rows
         affected_rows = cursor.rowcount
         self.conn.commit()
