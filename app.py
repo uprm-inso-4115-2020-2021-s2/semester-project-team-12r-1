@@ -29,9 +29,9 @@ def hello_world():
 @app.route('/pokemons', methods=['GET', 'POST'])
 def pokemons():
     if request.method == 'POST':
-        return BasePokemon().newPokemon(request.json)
+        return jsonify(BasePokemon().newPokemon(request.json))
     else:
-        return BasePokemon().getAllPokemon()
+        return jsonify(BasePokemon().getAllPokemon())
 
 @app.route('/pokemon/<int:pid>', methods=['GET', 'PUT', 'DELETE'])
 def spec_pokemon(pid):
