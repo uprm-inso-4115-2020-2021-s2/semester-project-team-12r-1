@@ -35,7 +35,7 @@ class SavedBuildDAO:
 
     def updatePokemon(self, p_id , pokemon_name, pokemon_lvl, pabilities_id):
         cursor = self.conn.cursor()
-        query = "update saved_builds set p_id=%s, pokemon_name=%s, pokemon_lvl=%s, pabilities_id=%s where pokemon_id=%s""
+        query = "update saved_builds set p_id=%s, pokemon_name=%s, pokemon_lvl=%s, pabilities_id=%s where pokemon_id=%s;"
         cursor.execute(query, (p_id , pokemon_name, pokemon_lvl, pabilities_id))
         pid = cursor.fetchone()[0]
         self.conn.commit()
