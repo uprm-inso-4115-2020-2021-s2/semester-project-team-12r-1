@@ -3,8 +3,8 @@ import psycopg2
 
 class BasePokemonDAO:
     def __init__(self):
-        connection_url = "dbname=%s user=%s password=%s port=%s host='localhost'" %(pg_config['dbname'], pg_config['user'],
-                                                                  pg_config['password'], pg_config['dbport'])
+        connection_url = "dbname=%s user=%s password=%s port=%s host=%s" %(pg_config['dbname'], pg_config['user'],
+                                                                  pg_config['password'], pg_config['dbport'], pg_config['host'])
         print("conection url:  ", connection_url)
         self.conn = psycopg2.connect(connection_url)
 
