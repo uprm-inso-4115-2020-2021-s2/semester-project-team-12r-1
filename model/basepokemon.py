@@ -17,11 +17,11 @@ class BasePokemonDAO:
             result.append(row)
         return result
 
-    def getPokemonById(self, p_id):
+    def getPokemonById(self, pid):
         cursor = self.conn.cursor()
         query = "select * from base_pokemon where p_id = %s;"
 
-        cursor.execute(query, (p_id))
+        cursor.execute(query, (pid))
         result = cursor.fetchone()
         return result
 
