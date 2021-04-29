@@ -10,7 +10,7 @@ class movesDAO:
 
     def getmoves(self):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_base_power, secondary_effect from moves;"
+        query = "select * from moves;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,16 +19,16 @@ class movesDAO:
 
     def getmovebyid(self, move_id):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_base_power, secondary_effect from moves where move_id = %s;"
+        query = "select * from moves where move_id = %s;"
 
-        cursor.execute(query, (move_id))
+        cursor.execute(query, (move_id,))
         result = cursor.fetchone()
         return result
 
     def insertmove(self,move_name, move_type, move_basepower, secondary_effect):
         cursor = self.conn.cursor()
         query = "insert into moves ( move_name, move_type, move_base_power, secondary_effect) values(%s,%s,%s,%s)returning move_id"
-        cursor.execute(query, (move_name, move_type, move_basepower, secondary_effect))
+        cursor.execute(query, (move_name, move_type, move_basepower, secondary_effect,))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
@@ -36,7 +36,7 @@ class movesDAO:
     def deleteitem(self, move_id):
         cursor = self.conn.cursor()
         query = "delete from moves where move_id=%s;"
-        cursor.execute(query,(move_id))
+        cursor.execute(query,(move_id,))
         # determine affected rows
         affected = cursor.rowcount
         self.conn.commit()
