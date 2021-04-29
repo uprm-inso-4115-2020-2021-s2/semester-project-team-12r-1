@@ -10,7 +10,7 @@ class movesDAO:
 
     def getmoves(self):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_basepower, secondary_effect from moves;"
+        query = "select move_id,move_name, move_type, move_base_power, secondary_effect from moves;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,7 +19,7 @@ class movesDAO:
 
     def getmovebyid(self, move_id):
         cursor = self.conn.cursor()
-        query = "select move_id,move_name, move_type, move_basepower, secondary_effect from moves where move_id = %s;"
+        query = "select move_id,move_name, move_type, move_base_power, secondary_effect from moves where move_id = %s;"
 
         cursor.execute(query, (move_id))
         result = cursor.fetchone()
@@ -27,7 +27,7 @@ class movesDAO:
 
     def insertmove(self,move_name, move_type, move_basepower, secondary_effect):
         cursor = self.conn.cursor()
-        query = "insert into moves ( move_name, move_type, move_basepower, secondary_effect) values(%s,%s,%s,%s)returning move_id"
+        query = "insert into moves ( move_name, move_type, move_base_power, secondary_effect) values(%s,%s,%s,%s)returning move_id"
         cursor.execute(query, (move_name, move_type, move_basepower, secondary_effect))
         pid = cursor.fetchone()[0]
         self.conn.commit()
