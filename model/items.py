@@ -10,7 +10,7 @@ class items:
 
     def getitems(self):
         cursor = self.conn.cursor()
-        query = "select pitemid, items_names from items;"
+        query = "select * from items;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,16 +19,16 @@ class items:
 
     def getitemById(self, pitemid):
         cursor = self.conn.cursor()
-        query = "select pitemid, items_names from items where pitemid = %s;"
+        query = "select * from items where pitemid = %s;"
 
-        cursor.execute(query, (pitemid))
+        cursor.execute(query, (pitemid,))
         result = cursor.fetchone()
         return result
 
     def insertitem(self, items_names):
         cursor = self.conn.cursor()
         query = "insert into item ( pitemid, items_names) values(%s,%s)returning pitemid"
-        cursor.execute(query, (items_names))
+        cursor.execute(query, (items_names,))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
@@ -36,8 +36,8 @@ class items:
 
     def deleteitem(self, pitemid):
         cursor = self.conn.cursor()
-        query = "delete from item where pitemid=%s;"
-        cursor.execute(query,(pitemid))
+        query = "delete from items where pitemid=%s;"
+        cursor.execute(query,(pitemid,))
         # determine affected rows
         affected_rows = cursor.rowcount
         self.conn.commit()
