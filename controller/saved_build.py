@@ -63,7 +63,7 @@ class SavedBuild:
         pokemon_lvl = json['pokemon_lvl']
         pabilities_id = json['pabilities_id']
         dao = SavedBuildDAO()
-        updated = dao.updatePokemon(p_id, pokemon_name,pokemon_lvl, pabilities_id)
+        updated = dao.updatePokemon(pid, p_id, pokemon_name,pokemon_lvl, pabilities_id)
         result = self.build_attr_dict(pid, p_id, pokemon_name,pokemon_lvl, pabilities_id)
         return jsonify(result), 200
     
