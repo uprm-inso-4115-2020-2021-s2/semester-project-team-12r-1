@@ -10,7 +10,7 @@ class abilitiesDAO:
 
     def getabilities(self):
         cursor = self.conn.cursor()
-        query = "select pabilities_id, pabilities_name from abilities;"
+        query = "select * from abilities;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -27,8 +27,8 @@ class abilitiesDAO:
 
     def insertability(self, pabilities_name):
         cursor = self.conn.cursor()
-        query = "insert into abilities ( pabilities_id, pabilities_name) values(%s,%s)returning pabilities_id"
-        cursor.execute(query, (pabilities_name))
+        query = "insert into abilities ( pabilities_name) values(%s)returning pabilities_id"
+        cursor.execute(query, (pabilities_name,))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
@@ -37,7 +37,7 @@ class abilitiesDAO:
     def deleteAbility(self, pabilities_id):
         cursor = self.conn.cursor()
         query = "delete from abilities where pabilities_id=%s;"
-        cursor.execute(query,(pabilities_id))
+        cursor.execute(query,(pabilities_id,))
         # determine affected rows
         affected_rows = cursor.rowcount
         self.conn.commit()
