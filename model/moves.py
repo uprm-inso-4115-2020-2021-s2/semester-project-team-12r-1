@@ -25,10 +25,10 @@ class movesDAO:
         result = cursor.fetchone()
         return result
 
-    def insertmove(self,move_name, move_type, move_basepower, secondary_effect):
+    def insertmove(self, move_type, move_basepower, secondary_effect, move_name):
         cursor = self.conn.cursor()
-        query = "insert into moves ( move_name, move_type, move_base_power, secondary_effect) values(%s,%s,%s,%s)returning move_id"
-        cursor.execute(query, (move_name, move_type, move_basepower, secondary_effect,))
+        query = "insert into moves ( move_type, move_base_power, secondary_effect, move_name) values(%s,%s,%s,%s)returning move_id"
+        cursor.execute(query, (move_type, move_basepower, secondary_effect, move_name,))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid
