@@ -20,7 +20,6 @@ class BasePokemonDAO:
     def getPokemonById(self, pid):
         cursor = self.conn.cursor()
         query = "select * from base_pokemon where p_id = %s;"
-
         cursor.execute(query, (pid))
         result = cursor.fetchone()
         return result
