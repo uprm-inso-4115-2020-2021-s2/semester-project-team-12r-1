@@ -33,7 +33,7 @@ class movesDAO:
         self.conn.commit()
         return pid
 
-    def deleteitem(self, move_id):
+    def deleteMove(self, move_id):
         cursor = self.conn.cursor()
         query = "delete from moves where move_id=%s;"
         cursor.execute(query,(move_id,))
