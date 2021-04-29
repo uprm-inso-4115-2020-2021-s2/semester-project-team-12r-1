@@ -24,11 +24,11 @@ class BasePokemonDAO:
         result = cursor.fetchone()
         return result
 
-    def insertPokemon(self, p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd):
+    def insertPokemon(self, p_id, p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd):
         cursor = self.conn.cursor()
-        query = "insert into base_pokemon (p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)returning p_id"
+        query = "insert into base_pokemon (p_id, p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)returning p_id"
 
-        cursor.execute(query, (p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd))
+        cursor.execute(query, (p_id, p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd))
         pid = cursor.fetchone()[0]
         self.conn.commit()
         return pid

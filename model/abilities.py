@@ -21,7 +21,7 @@ class abilitiesDAO:
         cursor = self.conn.cursor()
         query = "select pabilities_id, pabilities_name from abilities where pabilities_id = %s;"
 
-        cursor.execute(query, (pabilities_id))
+        cursor.execute(query, (pabilities_id,))
         result = cursor.fetchone()
         return result
 
