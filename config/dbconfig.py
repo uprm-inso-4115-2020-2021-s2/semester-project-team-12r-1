@@ -1,7 +1,7 @@
 pg_config = {
-    'user' : 'gjuhbgxwdjpaib',
-    'password' : 'c6fa678581cd67daf53d1fd6923ade33167c5cd6bc423c119909cc1e373d89d0',
-    'dbname' : 'd7h5pvg78p0epi',
+    'user' : 'envswegfsybzqe',
+    'password' : '300b942d09c2347c73247eac40eb62a50e721a805918881d9b07eb702b9aa128',
+    'dbname' : 'd44ebjn86b1u5d',
     'dbport' : 5432,
     'host' : 'ec2-52-1-115-6.compute-1.amazonaws.com'
 
