@@ -10,7 +10,7 @@ class BasePokemonDAO:
 
     def getAllPokemon(self):
         cursor = self.conn.cursor()
-        query = "select p_id, p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd from base_pokemon;"
+        query = "select * from base_pokemon;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -19,7 +19,7 @@ class BasePokemonDAO:
 
     def getPokemonById(self, p_id):
         cursor = self.conn.cursor()
-        query = "select p_id, p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd from base_pokemon where pid = %s;"
+        query = "select p_id, p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd from base_pokemon where p_id = %s;"
 
         cursor.execute(query, (p_id))
         result = cursor.fetchone()
@@ -27,7 +27,7 @@ class BasePokemonDAO:
 
     def insertPokemon(self, p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd):
         cursor = self.conn.cursor()
-        query = "insert into base_pokemon ( p_id, p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)returning pid"
+        query = "insert into base_pokemon (p_name, ptype1, ptype2, base_hp, base_atk,base_def, base_spatk,base_spdef,base_spd) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)returning p_id"
 
         cursor.execute(query, (p_name, p_type1, p_type2, base_hp, base_atk , base_def , base_spatk , base_spdef , base_spd))
         pid = cursor.fetchone()[0]
