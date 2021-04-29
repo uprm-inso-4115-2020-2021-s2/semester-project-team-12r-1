@@ -19,7 +19,7 @@ class abilitiesDAO:
 
     def getabilityById(self, pabilities_id):
         cursor = self.conn.cursor()
-        query = "select pabilities_id, pabilities_name from abilities where pabilities_id = %s;"
+        query = "select * from abilities where pabilities_id = %s;"
 
         cursor.execute(query, (pabilities_id,))
         result = cursor.fetchone()
