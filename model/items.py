@@ -27,7 +27,7 @@ class items:
 
     def insertitem(self, items_names):
         cursor = self.conn.cursor()
-        query = "insert into items ( items_names) values(%s)returning pitemid"
+        query = "insert into items ( items_name) values(%s)returning pitemid"
         cursor.execute(query, (items_names,))
         pid = cursor.fetchone()[0]
         self.conn.commit()
