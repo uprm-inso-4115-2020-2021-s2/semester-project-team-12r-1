@@ -8,6 +8,16 @@ class MovesPool:
         result['move_id'] = row[0]
         result['p_id'] = row[1]
         return result
+
+    def build_map_dict2(self, row):
+        result = {}
+        result['move_id'] = row[0]
+        return result
+
+    def build_map_dict3(self, row):
+        result = {}
+        result['p_id'] = row[1]
+        return result
     
     def build_attr_dict(self, move_id, p_id):
         result = {}
@@ -21,7 +31,7 @@ class MovesPool:
         if not move:
             return jsonify("Pokemon not found by moves Id"), 404
         else:
-            result = self.build_map_dict(move)
+            result = self.build_map_dict2(move)
             return jsonify(result)
 
     def getMovesByPid(self, pid):
@@ -30,7 +40,7 @@ class MovesPool:
         if not move:
             return jsonify("Move not found by pokemon"), 404
         else:
-            result = self.build_map_dict(move)
+            result = self.build_map_dict3(move)
             return jsonify(result)
     
     def insertMovePool(self, json):
