@@ -52,8 +52,8 @@ class BasePokemon:
     def newPokemon(self, json):
         p_id = json['p_id']
         p_name = json['p_name']
-        p_type1 = json['p_type1']
-        p_type2 = json['p_type2']
+        ptype1 = json['ptype1']
+        ptype2 = json['ptype2']
         base_hp = json['base_hp']
         base_atk = json['base_atk']
         base_def = json['base_def']
@@ -61,8 +61,8 @@ class BasePokemon:
         base_spdef = json['base_spdef']
         base_spd = json['base_spd']
         dao = BasePokemonDAO()
-        pid = dao.insertPokemon(p_id,p_name, p_type1,p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
-        result = self.build_attr_dict(pid, p_name, p_type1, p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        pid = dao.insertPokemon(p_id,p_name, ptype1,ptype2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        result = self.build_attr_dict(pid, p_name, ptype1, ptype2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
         return jsonify(result), 201
 
     def deletePokemon(self, pid):
