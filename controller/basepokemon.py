@@ -62,7 +62,7 @@ class BasePokemon:
         base_spd = json['base_spd']
         dao = BasePokemonDAO()
         pid = dao.insertPokemon(p_id,p_name, p_type1,p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
-        result = self.build_attr_dict(p_id, p_name, p_type1, p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
+        result = self.build_attr_dict(pid, p_name, p_type1, p_type2, base_hp, base_atk, base_def, base_spatk, base_spdef, base_spd)
         return jsonify(result), 201
 
     def deletePokemon(self, pid):
